@@ -1,23 +1,38 @@
+
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px;
+  left: 0;
   width: 250px;
   height: 100%;
-  background-color: #fff;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  transition: left 0.3s ease;
-  padding: 20px;
-  z-index: 1000;
+  background-color: #dddee0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
 }
 
-.sidebar.open {
-  left: 0;
+.sidebar.visible {
+  transform: translateX(0);
+} 
+
+ .sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.btn-close {
-  background: none;
+.sidebar ul li {
+  padding: 15px;
+  text-align: left;
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  top: 10px;
+   background: none;
   border: none;
   font-size: 1.5rem;
-  cursor: pointer;
+  
+ 
 }
+

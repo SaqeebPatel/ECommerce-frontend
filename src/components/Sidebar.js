@@ -1,19 +1,4 @@
-// import React from "react";
-// import "./Sidebar.css"; 
 
-// const Sidebar = ({ isOpen, toggleSidebar, handleLogout }) => {
-//   return (
-//     <div className={`sidebar ${isOpen ? "open" : ""}`}>
-//       <button  className="btn btn-outline-danger mt-5">
-//         Profile
-//       </button>
-//       <button onClick={handleLogout} className="btn btn-outline-danger mt-5">
-//         Logout
-//       </button>
-      
-//     </div>
-//   );
-// };import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
@@ -40,6 +25,7 @@ const Sidebar = ({ visible, toggleSidebar }) => {
       <ul>
         <li  class=" mt-1"onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</li>
       </ul>
+      <li  class=" mt-1" style={{ cursor: 'pointer' }}>Profile</li>
       <li onClick={toggleSidebar} className="btn btn-outline-dark">Close</li>
     </div>
   );

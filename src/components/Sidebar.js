@@ -26,6 +26,7 @@ const Sidebar = ({ visible, toggleSidebar }) => {
         <li  class=" mt-1"onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</li>
       </ul>
       <li  class=" mt-1" style={{ cursor: 'pointer' }}>Profile</li>
+      <li  class=" mt-1" style={{ cursor: 'pointer' }}>Cart</li>
       <li onClick={toggleSidebar} className="btn btn-outline-dark">Close</li>
     </div>
   );

@@ -14,6 +14,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     await register({ role, name, email, password, mobileNumber });
+    console.log(register)
     navigate('/login'); // Redirect to login page on successful registration
   };
 

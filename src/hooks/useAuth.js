@@ -29,53 +29,29 @@ const useAuth = () => {
     }
   };
 
-  // const login = async (userData) => {
-  //   try {
-  //     const response = await axios.post('http://localhost:5000/api/auth/login', userData);
-  //     const { token } = response.data.token;
-  //     setToken(token); // Store the token
-  //     console.log("*******Token",token)
-  //     setSuccess(response.data.success);
-  //     console.log("********Success",response.data.success);
-  //     toast.success('Logged in successfully');
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 401) {
-  //       toast.error('Incorrect email or password'); // Handle 401 Unauthorized error
-  //     } else if (error.response && error.response.status === 404) {
-  //       toast.error('User is not registered'); // Handle 404 Not Found error
-        
-  //     } else {
-  //       toast.error(error.response?.data?.message || 'Login failed'); // Handle other errors
-  //     }
-  //     return false
-  //   }
-  // };
-
-  async function login(userData) {
+  const login = async (userData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        userData
-      );
-      const { access: token, success } = response.data;
-      setToken(token);
-      console.log(token);
-      setSuccess(success);
-      console.log(success);
-      localStorage.setItem("token", token);
-      toast.success("Logged in successfully");
-      return success;
+      const response = await axios.post('http://localhost:5000/api/auth/login', userData);
+      const { token, success } = response.data; 
+      setToken(token); 
+      setSuccess(success); 
+      console.log("*******Token", token);
+      console.log("********Success", success);
+      toast.success('Logged in successfully');
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        toast.error("Invalid Email or Password");
+      if (error.response && error.response.status === 401) {
+        toast.error('Incorrect email or password'); 
       } else if (error.response && error.response.status === 404) {
-        toast.error("User is not registered");
+        toast.error('User is not registered'); 
       } else {
-        toast.error("Login failed. Please try again.");
+        toast.error(error.response?.data?.message || 'Login failed'); 
       }
       return false;
     }
-  }
+  };
+  
+
+
 
 
   const logout = () => {

@@ -1,5 +1,3 @@
-
-// export default Login;
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
@@ -8,19 +6,23 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, success } = useAuth();
+  const { login, success, token } = useAuth(); // Assuming `token` is also provided by useAuth
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  React.useEffect(() => {
+    if (success && token) { // Ensure both success and token are available
+      localStorage.setItem('token', token); // Store token in localStorage
+      console.log('token',token)
+      navigate('/home'); // Navigate to the home page
+      toast.success('Login success');
+    }
+  }, [success, token, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = await login({ email, password });
-      console.log(success);
-      if (success) {
-        navigate('/home'); 
-        toast.success('Login success');
-      }
+      await login({ email, password }); // Perform login
     } catch (error) {
       toast.error('Login failed. Please check your credentials.');
     }

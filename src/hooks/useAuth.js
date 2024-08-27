@@ -11,8 +11,7 @@ const useAuth = () => {
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
-      // const decodedUser = jwtDecode(token); // Extract the user from the token
-      // setUser(decodedUser); // Update the user state
+     
     } else {
       localStorage.removeItem('token');
       setUser(null); // Clear the user state when token is removed

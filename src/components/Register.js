@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for react-toastify
+
 const Register = () => {
   const navigate = useNavigate();
   const { register } = useAuth();
@@ -13,9 +15,13 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    await register({ role, name, email, password, mobileNumber });
-    console.log(register)
-    navigate('/login'); // Redirect to login page on successful registration
+    try {
+      await register({ role, name, email, password, mobileNumber });
+      toast.success('Registration successful!'); // Show success toast
+      navigate('/login'); // Redirect to login page on successful registration
+    } catch (error) {
+      toast.error('Registration failed. Please try again.'); // Show error toast
+    }
   };
 
   return (

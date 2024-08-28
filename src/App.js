@@ -16,13 +16,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
-  const { user, token } = useAuth();
+
   return (
    
 
     <Router>
       {/* <Navbar /> */}
-      {user && <Navbar user={user} token={token} />}
+    
       <Routes>
         
         <Route path="/" element={<Login />} />

@@ -1,4 +1,4 @@
-*,
+/* *,
 *:before,
 *:after {
     padding: 0;
@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color: #f0f0f5;
+    background-color: #372121;
 }
 .login-container {
     position: relative;
@@ -119,4 +119,4 @@ button {
 }
 .social i {
     margin-right: 4px;
-}
+} */

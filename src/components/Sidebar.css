@@ -1,4 +1,4 @@
-
+ /* Sidebar.css */
 .sidebar {
   position: fixed;
   top: 0;
@@ -13,9 +13,14 @@
 
 .sidebar.visible {
   transform: translateX(0);
-} 
+}
 
- .sidebar ul {
+.main-content {
+  margin-left: 250px; /* Adjust this value to the width of your sidebar */
+  padding: 20px;
+}
+
+.sidebar ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -29,10 +34,8 @@
 .sidebar .close-btn {
   position: absolute;
   top: 10px;
-   background: none;
+  background: none;
   border: none;
   font-size: 1.5rem;
-  
- 
 }
 

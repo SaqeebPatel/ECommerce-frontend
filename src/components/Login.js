@@ -185,72 +185,72 @@ const Login = () => {
   };
 
   return (
-    <div className="container login-container">
-      <div className="login-box">
-        <h2 className="text-center">Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary btn-block">
-            Login
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary btn-block"
-            onClick={() => navigate('/register')}
-          >
-            Register
-          </button>
-        </form>
-      </div>
+    // <div className="container login-container">
+    //   <div className="login-box">
+    //     <h2 className="text-center">Login</h2>
+    //     <form onSubmit={handleLogin}>
+    //       <div className="form-group">
+    //         <label htmlFor="email">Email:</label>
+    //         <input
+    //           type="email"
+    //           className="form-control"
+    //           id="email"
+    //           placeholder="Enter email"
+    //           value={email}
+    //           onChange={(e) => setEmail(e.target.value)}
+    //           required
+    //         />
+    //       </div>
+    //       <div className="form-group">
+    //         <label htmlFor="password">Password:</label>
+    //         <input
+    //           type="password"
+    //           className="form-control"
+    //           id="password"
+    //           placeholder="Enter password"
+    //           value={password}
+    //           onChange={(e) => setPassword(e.target.value)}
+    //           required
+    //         />
+    //       </div>
+    //       <button type="submit" className="btn btn-primary btn-block">
+    //         Login
+    //       </button>
+    //       <button
+    //         type="button"
+    //         className="btn btn-secondary btn-block"
+    //         onClick={() => navigate('/register')}
+    //       >
+    //         Register
+    //       </button>
+    //     </form>
+    //   </div>
       
+    // </div>
+    <div className="login-container">
+    <div className="background">
+      <div className="shape"></div>
+      <div className="shape"></div>
     </div>
+    <form onSubmit={handleLogin}> 
+      <h3>Login Here</h3>
+
+      <label htmlFor="username">Email</label>
+      <input type="text" placeholder="Email " id="username"  onChange={(e) => setEmail(e.target.value)}/>
+
+      <label htmlFor="password">Password</label>
+      <input type="password" placeholder="Password" id="password"onChange={(e) => setPassword(e.target.value)} />
+
+      <button type="submit">Log In</button>
+      <button type="submit"onClick={() => navigate('/register')}>Register</button>
+      
+    </form>
+  </div>
+
   );
 };
 // return (
   
-//   <div className="login-container">
-//     <div className="background">
-//       <div className="shape"></div>
-//       <div className="shape"></div>
-//     </div>
-//     <form onSubmit={handleLogin}> 
-//       <h3>Login Here</h3>
-
-//       <label htmlFor="username">Email</label>
-//       <input type="text" placeholder="Email " id="username"  onChange={(e) => setEmail(e.target.value)}/>
-
-//       <label htmlFor="password">Password</label>
-//       <input type="password" placeholder="Password" id="password"onChange={(e) => setPassword(e.target.value)} />
-
-//       <button type="submit">Log In</button>
-//       <button type="submit"onClick={() => navigate('/register')}>Register</button>
-      
-//     </form>
-//   </div>
-// );
-// };
+ 
 
 export default Login;

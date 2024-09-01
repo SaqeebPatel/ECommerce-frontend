@@ -1,4 +1,4 @@
- /* Sidebar.css */
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -9,15 +9,11 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
+  z-index: 1000; /* Ensure sidebar is above the content */
 }
 
 .sidebar.visible {
   transform: translateX(0);
-}
-
-.main-content {
-  margin-left: 250px; /* Adjust this value to the width of your sidebar */
-  padding: 20px;
 }
 
 .sidebar ul {
@@ -39,3 +35,16 @@
   font-size: 1.5rem;
 }
 
+/* Main Content */
+.main-content {
+  padding: 20px;
+  margin-left: 0; /* Remove the margin shift */
+}
+
+/* Ensure the home page takes up the full width */
+.home-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1; /* Ensure home page content is below the sidebar */
+}

@@ -62,32 +62,39 @@ const Sidebar = ({ visible, toggleSidebar }) => {
               <hr />
             </div>
           </div>
+        // ........................user............................................
         ) : (
           <div className="user">
             <div className={`sidebar ${visible ? "visible" : ""}`}>
               <div className="align-items-center">
                 <img
-                  src="https://previews.123rf.com/images/mamun25g/mamun25g2007/mamun25g200700784/151666606-sp-s-p-letter-logo-design-initial-letter-sp-linked-circle-uppercase-monogram-logo-red-and-blue-s-p.jpg"
+                  src="https://www.shutterstock.com/shutterstock/photos/2166589397/display_1500/stock-vector-sp-artistic-letter-logo-design-with-creative-serif-font-in-black-and-white-colors-vector-2166589397.jpg"
                   alt="Profile"
                   width="250px"
                   height="150px"
                   onClick={toggleSidebar}
                 />
               </div>
-
+                <hr/>
               <li className="mt-1" style={{ cursor: "pointer" }}>
                 Profile-user
-              </li>
+              </li><hr/>
+              <li className="mt-1" style={{ cursor: "pointer" }}>
+                <Link to="product">Products</Link>
+              </li><hr/>
               <li className="mt-1" style={{ cursor: "pointer" }}>
                 Cart
-              </li>
+              </li><hr/>
+              <li className="mt-1" style={{ cursor: "pointer" }}>
+                <Link to="categories">Categories</Link>
+              </li><hr/>
               <li className="m-1" style={{ cursor: "pointer" }} onClick={toggleSidebar}>
                 Close
-              </li>
+              </li><hr/>
               <ul>
                 <li className="mt-1" onClick={handleLogout} style={{ cursor: "pointer" }}>
                   Logout
-                </li>
+                </li><hr/>
               </ul>
             </div>
           </div>

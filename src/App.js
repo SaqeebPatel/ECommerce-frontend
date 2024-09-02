@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
-import Sidebar from './components/Sidebar';
 import { ToastContainer } from 'react-toastify';
 import useAuth from './hooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,17 +21,17 @@ function App() {
    
 
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
     
       <Routes>
         
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="home/*" element={<Sidebar/>} />
-        {/* <Route path="/navbar" element={<Navbar/>} /> */}
+        <Route path="/home/*" element={<Home />} />
+        <Route path="/navbar" element={<Navbar/>} />
       </Routes>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </Router>
 
     

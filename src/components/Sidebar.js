@@ -1,5 +1,3 @@
-
-// export default Sidebar;
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
@@ -7,14 +5,21 @@ import useAuth from "../hooks/useAuth";
 import { Routes, Route } from "react-router-dom";
 import AddCategory from "../pages/AddCategories";
 import AddProduct from "../pages/AddProduct";
-import Categories from "../pages/Categories"; 
+import Categories from "../pages/Categories";
 import Product from "../pages/Product";
+import AddtoCart from "../pages/AddtoCart";
+import UserProduct from "../pages/UserProduct";
+import UserCategories from "../pages/UserCategories";
+import UserCarousel from "../components/UserCarousel";
+import { FaCartShopping } from "react-icons/fa6";
+import { IoMdPerson } from "react-icons/io";
 
 const Sidebar = ({ visible, toggleSidebar }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     navigate("/login");
   };
 
@@ -24,9 +29,9 @@ const Sidebar = ({ visible, toggleSidebar }) => {
         user.role === "admin" ? (
           <div className="Admin">
             <div className={`sidebar ${visible ? "visible" : ""}`}>
-              <div className="align-items-center">
+              <div className="aagn-items-center">
                 <img
-                  src="https://previews.123rf.com/images/mamun25g/mamun25g2007/mamun25g200700784/151666606-sp-s-p-letter-logo-design-initial-letter-sp-linked-circle-uppercase-monogram-logo-red-and-blue-s-p.jpg"
+                  src="https://previews.123rf.com/images/mamun25g/mamun25g2007/mamun25g200700784/151666606-sp-s-p-letter-logo-design-initial-letter-sp-anked-circle-uppercase-monogram-logo-red-and-blue-s-p.jpg"
                   alt="Profile"
                   width="250px"
                   height="150px"
@@ -34,39 +39,38 @@ const Sidebar = ({ visible, toggleSidebar }) => {
                 />
               </div>
               <hr />
-              <li className="mt-1" style={{ cursor: "pointer" }}>
+              <a className="mt-1" style={{ cursor: "pointer" }}>
                 <Link to="product">Products</Link>
-              </li>
+              </a>
               <hr />
-              <li className="mt-1" style={{ cursor: "pointer" }}>
+              <a className="mt-1" style={{ cursor: "pointer" }}>
                 <Link to="AddProduct">Add-Product</Link>
-              </li>
+              </a>
               <hr />
-              <li className="mt-1" style={{ cursor: "pointer" }}>
+              <a className="mt-1" style={{ cursor: "pointer" }}>
                 <Link to="categories">Categories</Link>
-              </li>
+              </a>
               <hr />
-              <li>
+              <a>
                 <Link to="AddCategory" className="mt-1" style={{ cursor: "pointer" }}>
                   Add-Categories
                 </Link>
-              </li>
+              </a>
               <hr />
-              <li className="m-1" style={{ cursor: "pointer" }} onClick={toggleSidebar}>
+              <a className="m-1" style={{ cursor: "pointer" }} onClick={toggleSidebar}>
                 Close
-              </li>
+              </a>
               <hr />
-              <li className="mt-1" onClick={handleLogout} style={{ cursor: "pointer" }}>
+              <a className="mt-1" onClick={handleLogout} style={{ cursor: "pointer" }}>
                 Logout
-              </li>
+              </a>
               <hr />
             </div>
           </div>
-        // ........................user............................................
         ) : (
           <div className="user">
             <div className={`sidebar ${visible ? "visible" : ""}`}>
-              <div className="align-items-center">
+              <div className="aagn-items-center">
                 <img
                   src="https://www.shutterstock.com/shutterstock/photos/2166589397/display_1500/stock-vector-sp-artistic-letter-logo-design-with-creative-serif-font-in-black-and-white-colors-vector-2166589397.jpg"
                   alt="Profile"
@@ -75,26 +79,34 @@ const Sidebar = ({ visible, toggleSidebar }) => {
                   onClick={toggleSidebar}
                 />
               </div>
-                <hr/>
-              <li className="mt-1" style={{ cursor: "pointer" }}>
+              <hr/>
+              <IoMdPerson style={{ fontSize: "22px", marginRight: "8px" }} />
+              <a className="mt-1" style={{ cursor: "pointer" }}>
                 Profile-user
-              </li><hr/>
-              <li className="mt-1" style={{ cursor: "pointer" }}>
-                <Link to="product">Products</Link>
-              </li><hr/>
-              <li className="mt-1" style={{ cursor: "pointer" }}>
-                Cart
-              </li><hr/>
-              <li className="mt-1" style={{ cursor: "pointer" }}>
-                <Link to="categories">Categories</Link>
-              </li><hr/>
-              <li className="m-1" style={{ cursor: "pointer" }} onClick={toggleSidebar}>
+              </a>
+              <hr/>
+              <a className="mt-1" style={{ cursor: "pointer" }}>
+                <Link to="UserProduct">Products</Link>
+              </a>
+              <hr/>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <FaCartShopping style={{ fontSize: "22px", marginRight: "8px" }} />
+                <Link to="AddtoCart">Cart</Link>
+              </div>
+              <hr/>
+              <a className="mt-1" style={{ cursor: "pointer" }}>
+                <Link to="UserCategories">Categories</Link>
+              </a>
+              <hr/>
+              <a className="m-1" style={{ cursor: "pointer" }} onClick={toggleSidebar}>
                 Close
-              </li><hr/>
+              </a>
+              <hr/>
               <ul>
-                <li className="mt-1" onClick={handleLogout} style={{ cursor: "pointer" }}>
+                <a className="mt-1" onClick={handleLogout} style={{ cursor: "pointer" }}>
                   Logout
-                </li><hr/>
+                </a>
+                <hr/>
               </ul>
             </div>
           </div>
@@ -104,10 +116,14 @@ const Sidebar = ({ visible, toggleSidebar }) => {
       )}
       <div className="main-content">
         <Routes>
+          <Route path="/" element={< UserCarousel/>} />
           <Route path="product" element={<Product />} />
           <Route path="AddCategory" element={<AddCategory />} />
           <Route path="categories" element={<Categories />} />
           <Route path="AddProduct" element={<AddProduct />} />
+          <Route path="AddtoCart" element={<AddtoCart />} />
+          <Route path="UserProduct" element={<UserProduct />} />
+          <Route path="UserCategories" element={<UserCategories />} />
         </Routes>
       </div>
     </>

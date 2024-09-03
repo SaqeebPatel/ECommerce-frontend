@@ -7,12 +7,13 @@ import AddCategory from "../pages/AddCategories";
 import AddProduct from "../pages/AddProduct";
 import Categories from "../pages/Categories";
 import Product from "../pages/Product";
-import AddtoCart from "../pages/AddtoCart";
+import Cart from "../pages/Cart";
 import UserProduct from "../pages/UserProduct";
 import UserCategories from "../pages/UserCategories";
 import UserCarousel from "../components/UserCarousel";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
+
 
 const Sidebar = ({ visible, toggleSidebar }) => {
   const { user } = useAuth();
@@ -91,7 +92,7 @@ const Sidebar = ({ visible, toggleSidebar }) => {
               <hr/>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <FaCartShopping style={{ fontSize: "22px", marginRight: "8px" }} />
-                <Link to="AddtoCart">Cart</Link>
+                <Link to="Cart">Cart</Link>
               </div>
               <hr/>
               <a className="mt-1" style={{ cursor: "pointer" }}>
@@ -121,9 +122,10 @@ const Sidebar = ({ visible, toggleSidebar }) => {
           <Route path="AddCategory" element={<AddCategory />} />
           <Route path="categories" element={<Categories />} />
           <Route path="AddProduct" element={<AddProduct />} />
-          <Route path="AddtoCart" element={<AddtoCart />} />
+          {/* <Route path="AddtoCart" element={<AddtoCart />} /> */}
           <Route path="UserProduct" element={<UserProduct />} />
           <Route path="UserCategories" element={<UserCategories />} />
+          <Route path="Cart" element={<Cart/>} />
         </Routes>
       </div>
     </>

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Cart from"../pages/Cart";
+import { Routes, Route , Link} from "react-router-dom";
+
 
 const UserProduct = () => {
   const [products, setProducts] = useState([]);
@@ -25,6 +28,7 @@ const UserProduct = () => {
   }, []);
 
   return (
+    <>
     <div className="container">
       <div className="row">
         {products.length === 0 ? (
@@ -56,10 +60,12 @@ const UserProduct = () => {
                   </li>
                 </ul>
                 <div className="card-body d-flex justify-content-between">
-                  <a href="#" className="btn btn-outline-info" style={{ width: "45%", height:"20%" }}>
-                    Add to Cart
-                  </a>
-                  <a href="#" className="btn btn-outline-info"style={{ width: "45%" }}>
+                  <a to="Cart"><a  href="#" className="btn btn-outline-info" >
+                    {/* style={{ width: "45%", height:"20%" }} */}
+                    AddtoCart
+                  </a></a>
+                  <a href="#" className="btn btn-outline-info">
+                  {/* style={{ width: "45%" }} */}
                     View Details
                   </a>
                 </div>
@@ -69,7 +75,13 @@ const UserProduct = () => {
         )}
       </div>
     </div>
+    <div className="main-content">
+    <Routes>
+      
+      <Route path="Cart" element={<Cart />} />
+    </Routes>
+  </div>
+  </>
   );
 };
-
 export default UserProduct;

@@ -1,40 +1,9 @@
 
-// import React, { useState } from "react";
-// import useAuth from "../hooks/userAuth";
-
-// export default function Categories() {
-//   const [category, setCategory] = useState([]);
-
-//   useAuth(setCategory, "http://localhost:5000/api/categories/getcategory");
-
-//   return (
-//     <div className="container mt-5">
-//       <h1 style={{ marginLeft: "500px" }}>Category</h1>
-//       <div className="row justify-content-center">
-//         {category.map((cat) => (
-//           <div key={cat._id} className="col-md-4">
-//             <div className="card mb-4">
-//               <div className="card-body text-center">
-//                 <h5 className="card-title">{cat.categoryname}</h5>
-//                 <p className="card-text">
-//                   With supporting text below as a natural lead-in to additional
-//                   content.
-//                 </p>
-//                 <a href="#" className="btn btn-primary">
-//                   Go somewhere
-//                 </a>
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import useAuth from "../hooks/userAuth";
 import { toast } from "react-toastify";
+import './Categories.css'; // Import the CSS file
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -48,12 +17,20 @@ export default function Categories() {
   // Delete category function
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/categories/deletecategory/${id}`);
+      await axios.delete(`http://localhost:5000/api/categories/deletecategory/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming you're storing the JWT token in localStorage
+        },
+      });
       setCategories(categories.filter((category) => category._id !== id));
       toast.success("Category deleted successfully");
     } catch (err) {
-      setError("Failed to delete category.");
-      toast.error("Failed to delete category.");
+      if (err.response && err.response.status === 401) {
+        toast.error("Unauthorized: You do not have permission to delete this category.");
+      } else {
+        setError("Failed to delete category.");
+        toast.error("Failed to delete category.");
+      }
     }
   };
 
@@ -86,89 +63,67 @@ export default function Categories() {
   };
 
   return (
-    <div className="container mt-5">
-      <h1 style={{ marginLeft: "500px" }}>Category</h1>
-      <div className="table-responsive">
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>Category Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((cat) => (
-              <tr key={cat._id}>
-                <td>{cat.categoryname}</td>
-                <td>
-                  <button
-                    className="btn btn-primary btn-sm mr-2"
-                    onClick={() => handleEdit(cat)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(cat._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="cat-container mt-5">
+      <h1 className="text-center">Category</h1>
+      <ul className="category-list">
+        {categories.map((cat) => (
+          <li key={cat._id} className="category-item">
+            <span>{cat.categoryname}</span>
+            <div className="category-actions">
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={() => handleEdit(cat)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDelete(cat._id)}
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
       {error && <div className="alert alert-danger">{error}</div>}
 
       {/* Edit Category Modal */}
       {showEditModal && (
-        <div className="modal" style={{ display: "block" }}>
-          <div className="modal-dialog">
+        <div className="modal show d-block modal-backdrop">
+          <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Edit Category</h5>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="categoryName">Category Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="categoryName"
+                    value={editCategory?.categoryname || ""}
+                    onChange={(e) =>
+                      setEditCategory({
+                        ...editCategory,
+                        categoryname: e.target.value,
+                      })
+                    }
+                  />
+                </div>
                 <button
                   type="button"
-                  className="close"
+                  className="btn btn-primary"
+                  onClick={handleUpdate}
+                >
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary ml-2"
                   onClick={() => setShowEditModal(false)}
                 >
-                  &times;
+                  Close
                 </button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="categoryName">Category Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="categoryName"
-                      value={editCategory?.categoryname || ""}
-                      onChange={(e) =>
-                        setEditCategory({
-                          ...editCategory,
-                          categoryname: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleUpdate}
-                  >
-                    Save Changes
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-secondary ml-2"
-                    onClick={() => setShowEditModal(false)}
-                  >
-                    Close
-                  </button>
-                </form>
-              </div>
+              </form>
             </div>
           </div>
         </div>

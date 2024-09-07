@@ -1,19 +1,18 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Routes, Route } from "react-router-dom";
 import "./Sidebar.css";
 import useAuth from "../hooks/useAuth";
-import { Routes, Route } from "react-router-dom";
 import AddCategory from "../pages/AddCategories";
 import AddProduct from "../pages/AddProduct";
 import Categories from "../pages/Categories";
 import Product from "../pages/Product";
-import Cart from "../pages/Cart";
+import Cart from "../pages/ProductDetails";
 import UserProduct from "../pages/UserProduct";
 import UserCategories from "../pages/UserCategories";
 import UserCarousel from "../components/UserCarousel";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
-
+import ProductDetails from "../pages/ProductDetails";
 
 const Sidebar = ({ visible, toggleSidebar }) => {
   const { user } = useAuth();
@@ -41,7 +40,7 @@ const Sidebar = ({ visible, toggleSidebar }) => {
               </div>
               <hr />
               <a className="mt-1" style={{ cursor: "pointer" }}>
-                <Link to="product">Products</Link>
+                <Link to="Product">Products</Link>
               </a>
               <hr />
               <a className="mt-1" style={{ cursor: "pointer" }}>
@@ -80,34 +79,34 @@ const Sidebar = ({ visible, toggleSidebar }) => {
                   onClick={toggleSidebar}
                 />
               </div>
-              <hr/>
+              <hr />
               <IoMdPerson style={{ fontSize: "22px", marginRight: "8px" }} />
               <a className="mt-1" style={{ cursor: "pointer" }}>
                 Profile-user
               </a>
-              <hr/>
+              <hr />
               <a className="mt-1" style={{ cursor: "pointer" }}>
                 <Link to="UserProduct">Products</Link>
               </a>
-              <hr/>
+              <hr />
               <div style={{ display: "flex", alignItems: "center" }}>
                 <FaCartShopping style={{ fontSize: "22px", marginRight: "8px" }} />
-                <Link to="Cart">Cart</Link>
+                <Link to="ProductDetails">Cart</Link>
               </div>
-              <hr/>
+              <hr />
               <a className="mt-1" style={{ cursor: "pointer" }}>
                 <Link to="UserCategories">Categories</Link>
               </a>
-              <hr/>
+              <hr />
               <a className="m-1" style={{ cursor: "pointer" }} onClick={toggleSidebar}>
                 Close
               </a>
-              <hr/>
+              <hr />
               <ul>
                 <a className="mt-1" onClick={handleLogout} style={{ cursor: "pointer" }}>
                   Logout
                 </a>
-                <hr/>
+                <hr />
               </ul>
             </div>
           </div>
@@ -117,15 +116,14 @@ const Sidebar = ({ visible, toggleSidebar }) => {
       )}
       <div className="main-content">
         <Routes>
-          <Route path="/" element={< UserCarousel/>} />
-          <Route path="product" element={<Product />} />
+          <Route path="/" element={<UserCarousel />} />
+          <Route path="Product" element={<Product />} />
           <Route path="AddCategory" element={<AddCategory />} />
           <Route path="categories" element={<Categories />} />
           <Route path="AddProduct" element={<AddProduct />} />
-          {/* <Route path="AddtoCart" element={<AddtoCart />} /> */}
           <Route path="UserProduct" element={<UserProduct />} />
           <Route path="UserCategories" element={<UserCategories />} />
-          <Route path="Cart" element={<Cart/>} />
+          <Route path="ProductDetails" element={<ProductDetails />} />
         </Routes>
       </div>
     </>

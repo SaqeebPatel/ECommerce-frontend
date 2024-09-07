@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Cart from"../pages/Cart";
+import ProductDetails from"../pages/ProductDetails";
 import { Routes, Route , Link} from "react-router-dom";
 
 
@@ -26,6 +26,11 @@ const UserProduct = () => {
     }
     fetchProducts();
   }, []);
+
+
+  const handleAdd = () => {
+    
+  }
 
   return (
     <>
@@ -56,13 +61,13 @@ const UserProduct = () => {
                     Description: {pro.description || "No description available"}
                   </li>
                   <li className="list-group-item">
-                    Category: {pro.category.categoryname || "Uncategorized"}
+                    {/* Category: {pro.category.categoryname || "Uncategorized"} */}
                   </li>
                 </ul>
-                <div className="card-body d-flex justify-content-between">
-                  <a to="Cart"><a  href="#" className="btn btn-outline-info" >
+                <div onClick={() => handleAdd()} className="card-body d-flex justify-content-between">
+                  <a to="ProductDetails"><a  href="#" className="btn btn-outline-info" >
                     {/* style={{ width: "45%", height:"20%" }} */}
-                    AddtoCart
+                    Add
                   </a></a>
                   <a href="#" className="btn btn-outline-info">
                   {/* style={{ width: "45%" }} */}
@@ -78,7 +83,7 @@ const UserProduct = () => {
     <div className="main-content">
     <Routes>
       
-      <Route path="Cart" element={<Cart />} />
+      <Route path="ProductDetails" element={<ProductDetails />} />
     </Routes>
   </div>
   </>

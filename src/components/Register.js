@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS for react-toastify
+import './login.css';
+import './Register.css';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -27,8 +29,9 @@ const Register = () => {
   return (
     <div className="container Register-container">
       <div className="login-box">
+       
+        <form  className="Registerfrom"onSubmit={handleRegister}>
         <h2 className="text-center">Register</h2>
-        <form onSubmit={handleRegister}>
           <div className="form-group">
             <label>Role</label>
             <select
@@ -87,12 +90,12 @@ const Register = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-block">
+          <button type="submit">
             Register
           </button>
           <button
             type="button"
-            className="btn btn-secondary btn-block"
+           
             onClick={() => navigate('/login')}
           >
             Login

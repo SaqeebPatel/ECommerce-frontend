@@ -1,55 +1,76 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { CartContext } from "../hooks/CartContext"; // Adjust path accordingly
 
-const ProductDetails = () => {
-  const { id } = useParams(); // Get the product ID from the URL
-  const [product, setProduct] = useState(null);
-
-  useEffect(() => {
-    async function fetchProduct() {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/products/getProduct/${id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        setProduct(response.data);
-      } catch (err) {
-        console.error("Failed to fetch product details", err);
-      }
-    }
-    fetchProduct();
-  }, [id]);
-
-  if (!product) return <p>Loading...</p>;
+const Cart = () => {
+  const { cart, removeFromCart } = useContext(CartContext); // Get cart and removeFromCart from the context
 
   return (
-    <div className="container mt-4">
-      <div className="card" style={{ width: "50rem", margin: "auto" }}>
-        <img
-          src={product.image || "default-image-url"}
-          className="card-img-top"
-          alt={product.productname}
-        />
-        <div className="card-body">
-          <h5 className="card-title">Name - {product.productname}</h5>
-          <p className="card-text">Price: {product.price}</p>
-          <p className="card-text">Quantity: {product.quantity}</p>
-          <p className="card-text">
-            Description: {product.description || "No description available"}
-          </p>
-          <p className="card-text">
-            Category: {product.category.categoryname || "Uncategorized"}
-          </p>
-        </div>
+    <div
+      className="cat-container mt-5r"
+      // style={{ height: "100vh", marginTop: "10%" }} // This makes the container take the full height of the viewport
+    >
+      <div className="card mb-3" >
+       
+        {cart.length === 0 ? (
+          <>
+          
+          {/* <p>No items in the cart</p> */}
+          </>
+        ) : (
+          <ul style={{ paddingLeft: 0, margin: 0 }}>
+            {cart.map((product, index) => (
+              <li
+                key={index}
+                style={{
+                  listStyleType: "none",
+                  marginBottom: "20px", // Adjust the gap here
+                }}
+              >
+                <div className="d-flex gap-2">
+                  <div className="col-md-6" style={{ marginTop: "10%" }}>
+                    <img
+                      className="img-fluid"
+                      src={product.image}
+                      alt="Product"
+                      width={700}
+                    />
+                  </div>
+                  <div className="col-md-6" style={{ marginTop: "10%" }}>
+                    <h5>Name : {product.productname}</h5>
+                    <p>Price: {product.price}</p>
+                    <p>Quantity: {product.quantity}</p>
+                    <p>Available: {product.available ? "In Stock" : "Out of Stock"}</p>
+                    <div className="d-flex gap-2" style={{ maxWidth: "80%"}}>
+                      <button
+                        className="btn btn-info btn-custom-small"
+                        onClick={() => removeFromCart(product._id)}
+                      >
+                        More info
+                      </button>
+                      <button
+                        className="btn btn-success btn-custom-medium"
+                        onClick={() => removeFromCart(product._id)}
+                      >
+                        Buy Now
+                      </button>
+                      <button
+                        className="btn btn-outline-danger btn-custom-large"
+                        onClick={() => removeFromCart(product.id)}
+                      >
+                        Remove
+                      </button>
+                     
+                    </div>
+                    
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
 };
 
-export default ProductDetails;
+export default Cart;

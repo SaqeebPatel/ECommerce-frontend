@@ -252,7 +252,10 @@ function ProductModify() {
     setSelectedProduct(product);
     setUpdatedProduct({
       productname: product.productname,
+      description: product.description,
+      image: product.image,
       price: product.price,
+      available: product.available,
       quantity: product.quantity,
     });
     setShowModal(true);
@@ -335,11 +338,13 @@ function ProductModify() {
         <thead>
           <tr>
             <th style={{ color: "blue" }}>Product Name</th>
+            <th style={{ color: "blue" }}>Product description</th>
             <th style={{ color: "blue" }}>Image</th>
-            <th style={{ color: "blue" }}>Created At</th>
-            <th style={{ color: "blue" }}>Quantity</th>
             <th style={{ color: "blue" }}>Price</th>
-            <th style={{ color: "blue" }}>Available</th>
+            <th style={{ color: "blue" }}>Quantity</th>
+             <th style={{ color: "blue" }}>Available</th>
+             <th style={{ color: "blue" }}>category</th>
+            <th style={{ color: "blue" }}>Created At</th>
             <th style={{ color: "blue" }}>Update</th>
             <th style={{ color: "blue" }}>Delete</th>
           </tr>
@@ -348,6 +353,7 @@ function ProductModify() {
           {products.map((product) => (
             <tr key={product._id}>
               <td style={{ color: "black" }}>{product.productname}</td>
+              <td style={{ color: "black" }}>{product.description}</td>
               <td>
                 {product.image && (
                   <img
@@ -357,10 +363,13 @@ function ProductModify() {
                   />
                 )}
               </td>
-              <td>{new Date(product.updatedAt).toLocaleDateString()}</td>
-              <td>{product.quantity}</td>
+             
               <td>{product.price}</td>
+              <td>{product.quantity}</td>
+              
               <td>{product.available ? "In Stock" : "Out of Stock"}</td>
+              <td>not </td>
+              <td>{new Date(product.updatedAt).toLocaleDateString()}</td>
               <td>
                 <FaEdit
                   style={{
@@ -398,7 +407,29 @@ function ProductModify() {
                 className="form-control"
                 id="productname"
                 name="productname"
-                value={updatedProduct.productname}
+                value={selectedProduct?.productname || ""}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Product Description</label>
+              <textarea
+                className="form-control"
+                id="description"
+                name="description"
+                rows="3"
+                value={selectedProduct?.description || ""}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+            <div className="form-group">
+              <label htmlFor="image">Image</label>
+              <input
+                type="file"
+                className="form-control"
+                id="image"
+                name="image"
+                // value={updatedProduct.image}
                 onChange={handleChange}
               />
             </div>
@@ -409,7 +440,7 @@ function ProductModify() {
                 className="form-control"
                 id="price"
                 name="price"
-                value={updatedProduct.price}
+                value={selectedProduct?.price || ""}
                 onChange={handleChange}
               />
             </div>
@@ -423,6 +454,17 @@ function ProductModify() {
                 value={updatedProduct.quantity}
                 onChange={handleChange}
               />
+            </div>
+            <div className="form-group">
+            <label htmlFor="available">Available</label>
+            <input
+            type="checkbox"
+            className="form-control"
+            id="available"
+            name="available"
+            checked={selectedProduct?.available || false}
+            onChange={handleChange}
+            />
             </div>
           </Modal.Body>
           <Modal.Footer>

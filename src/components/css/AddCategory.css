@@ -1,0 +1,57 @@
+/* AddCategory.css */
+
+/* Ensure the container takes up the full viewport height */
+#login-page {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;     /* Vertically center */
+    height: 100vh;           /* Full viewport height */
+    /* Background color */
+  }
+  
+  /* Style the form */
+  .AddCategory {
+    background: #fefafa;       /* Form background color */
+    padding: 2rem;           /* Add padding inside the form */
+    border-radius: 8px;      /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    width: 100%;
+    max-width: 600px;        /* Max width for form */
+  }
+  
+  /* Style for form labels and controls */
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control {
+    margin-bottom: 1rem;
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border-color: #007bff;     /* Button border color */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Button hover color */
+    border-color: #004085;     /* Button border color on hover */
+  }
+  
+  /* Style for alert messages */
+  .alert {
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  

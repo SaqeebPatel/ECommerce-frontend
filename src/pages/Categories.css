@@ -3,9 +3,11 @@
 
    .cat-container {
     margin-top: 5rem;
-    background-color: rgb(56, 60, 60);
+    border-color: #151010;
+    background-color: #fefafa;
+    
     border-radius: 2%; 
-    color: rgb(255, 255, 255); 
+    color: rgb(27, 24, 24); 
   }
   
   .category-list {
@@ -19,7 +21,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #151010;
   }
   
   .category-actions {

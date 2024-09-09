@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Form, Button, Alert } from "react-bootstrap";
-
+import"../components/css/AddProduct.css";
 function AddProduct() {
   const [productname, setProductname] = useState("");
   const [image, setImage] = useState(null);
@@ -94,9 +94,11 @@ function AddProduct() {
   };
   
   return (
+    <div >
     <Container>
-      <h2>Add Product</h2>
+     
       <Form onSubmit={handleSubmit}>
+      <h2>Add Product</h2>
         <Form.Group controlId="productName">
           <Form.Label>Product Name</Form.Label>
           <Form.Control
@@ -182,6 +184,7 @@ function AddProduct() {
         </Button>
       </Form>
     </Container>
+    </div>
   );
 }
 

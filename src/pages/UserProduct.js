@@ -6,7 +6,7 @@ import ProductDetails from "../pages/ProductDetails"; // adjust path accordingly
 
 const UserProduct = () => {
   const [products, setProducts] = useState([]);
-  const { addToCart } = useContext(CartContext); // Use the addToCart function from the context
+  const { addToCart,showMoreInfo } = useContext(CartContext); // Use the addToCart function from the context
 
   useEffect(() => {
     async function fetchProducts() {
@@ -52,27 +52,21 @@ const UserProduct = () => {
                   <div className="card-body">
                     <h5 className="card-title">Name - {pro.productname}</h5>
                     <p className="card-text">Price: {pro.price}</p>
-                    <p className="card-text">Quantity: {pro.quantity}</p>
+                    {/* <p className="card-text">Price: {pro.product.categoryname}</p> */}
+                   
                   </div>
-                  <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                      Description: {pro.description || "No description available"}
-                    </li>
-                    <li className="list-group-item">
-                      {/* Category: {pro.category.categoryname || "Uncategorized"} */}
-                    </li>
-                  </ul>
+                 
                   <div className="card-body d-flex justify-content-between">
-                    <a
+                    <button
                       onClick={() => handleAdd(pro)}
-                      href="#"
                       className="btn btn-outline-info"
                     >
                       Add
-                    </a>
-                    <Link to="ProductDetails" className="btn btn-outline-info">
+                    </button>
+                    <button to="ProductDetails" className="btn btn-outline-info"
+                    onClick={() => showMoreInfo(pro)}>
                       View Details
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

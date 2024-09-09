@@ -1,21 +1,23 @@
+
+// export default Cart;
 import React, { useContext } from "react";
 import { CartContext } from "../hooks/CartContext"; // Adjust path accordingly
 
 const Cart = () => {
-  const { cart, removeFromCart } = useContext(CartContext); // Get cart and removeFromCart from the context
+  const { cart, removeFromCart, showMoreInfo ,buyNow} = useContext(CartContext); // Get functions from the context
+
+  // Check if user is logged in
+  const isLoggedIn = !!localStorage.getItem("token");
+
+  if (!isLoggedIn) {
+    return <p>You must be logged in to view the cart.</p>;
+  }
 
   return (
-    <div
-      className="cat-container mt-5r"
-      // style={{ height: "100vh", marginTop: "10%" }} // This makes the container take the full height of the viewport
-    >
-      <div className="card mb-3" >
-       
+    <div className="cat-container mt-5r">
+      <div className="card mb-3">
         {cart.length === 0 ? (
-          <>
-          
-          {/* <p>No items in the cart</p> */}
-          </>
+          <p>No items in the cart</p>
         ) : (
           <ul style={{ paddingLeft: 0, margin: 0 }}>
             {cart.map((product, index) => (
@@ -43,25 +45,23 @@ const Cart = () => {
                     <div className="d-flex gap-2" style={{ maxWidth: "80%"}}>
                       <button
                         className="btn btn-info btn-custom-small"
-                        onClick={() => removeFromCart(product._id)}
+                        onClick={() => showMoreInfo(product)}
                       >
                         More info
                       </button>
                       <button
                         className="btn btn-success btn-custom-medium"
-                        onClick={() => removeFromCart(product._id)}
+                        onClick={() => buyNow(product)}
                       >
                         Buy Now
                       </button>
                       <button
                         className="btn btn-outline-danger btn-custom-large"
-                        onClick={() => removeFromCart(product.id)}
+                        onClick={() => removeFromCart(product._id)}
                       >
                         Remove
                       </button>
-                     
                     </div>
-                    
                   </div>
                 </div>
               </li>

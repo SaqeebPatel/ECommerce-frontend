@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import"../components/css/AddCategory.css";
 
 const AddCategory = () => {
   const [categoryname, setcategoryname] = useState('');
@@ -43,9 +44,9 @@ const AddCategory = () => {
   };
 
   return (
-    <div className="container">
+    <div id="login-page" class="containeraddpros">
       <ToastContainer />
-      <form onSubmit={handleSubmit}>
+      <form className='AddCategory' onSubmit={handleSubmit}>
         <div className="form-group">
           <h2 className="ml-2">Add Category</h2>
           <label htmlFor="categoryName">Category Name</label>
@@ -81,5 +82,28 @@ const AddCategory = () => {
     </div>
   );
 };
+{/* <div id="login-page" class="container">
+  <form>
+    <div class="row">
+      <h4>Account</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" placeholder="Full Name"/>
+        <div class="input-icon">
+          <i class="fa fa-user"></i>
+        </div>
+      </div>
+    
+    </div>
+  
+    
+   
+  </form>
+</div> */}
+
+
+  // )}
+  
+
+
 
 export default AddCategory;
